@@ -1,0 +1,48 @@
+< OpenCV 얼굴인식 프로젝트1 >
+## Step1 : 데이터 수집하기
+- 웹캠에서 얼굴 부분만 검출하여 사진 100장 찍어 폴더에 저장하기
+
+1) cv2.CascadeClassifier() 객체 선언하기
+2) cv2.VideoCapture(0) 객체 선언하기
+3) 웹캠이 열려있으면
+- frame 을 읽어서
+- 회색조로 변경
+- detectMultiScale() 사용하여 얼굴 감지하기
+- 감지된 얼굴에 대해 사이즈  줄여 지정한 폴더에 구분자를 붙여 이미지로 저장하기(cv2.imwrite())
+- 화면에는 카운트 숫자 표기하기
+- 'q'로 종료하거나 count 가 100일때 종료하기
+
+## Step2 : 모델 학습하기
+- 저장된 얼굴 이미지를 읽어서 모델 학습하기
+1) 저장된 폴더에서 이미지를 읽어(cv2.imread() ) 회색조로 저장하기
+2) 100장의 이미지를 리스트에 학습할 데이터(Training_Data) 와 Labels을 append 하여 각각 저장하기
+3) 모델 객체 생성하기 : model = cv2.face.LBPHFaceRecognizer_create()
+4) 모델 학습하기 : model.train(Training_Data, Labels)
+5) 훈련된 모델 파일로 저장하기 :model.write('face_model.yml')
+
+### 주의!
+-  cv2.face.LBPHFaceRecognizer_create()
+을 이용해 모델을 학습시키기 할때 다음 에러 발생 시 설치하기
+> !pip install --user opencv-python-headless==4.8.1.78
+> !pip install --user opencv-contrib-python==4.8.1.78
+> !python -m pip install --upgrade pip
+> !pip3 install scikit-build
+> !pip install cmake
+
+## Step3 : 얼굴 인식하기
+- 분류기를 사용하여 웹캠에 비친 얼굴 중 학습한 사용자 인식하기
+1) cv2.CascadeClassifier() 객체 선언하기
+2) cv2.VideoCapture(0) 객체 선언하기
+3) 웹캠이 열려있으면
+- frame 을 읽어서
+- 회색조로 변경
+- detectMultiScale() 사용하여 얼굴 감지하기
+- 얼굴이 검출된 경우
+	- 회색조로 변경하고
+             - 모델 예측하기 : model.predict()
+             - 예측 결과 신뢰도로가 75 이상인경우 화면에 "ACCESS GRANTED"
+                아니면 "ACCESS DENIED"                              
+- 'q'로 종료
+
+### 주의! : step3 에서 'AttributeError: module 'cv2.cv2' has no attribute 'face' 발생시
+> !pip install --user opencv-contrib-python==4.6.0.66

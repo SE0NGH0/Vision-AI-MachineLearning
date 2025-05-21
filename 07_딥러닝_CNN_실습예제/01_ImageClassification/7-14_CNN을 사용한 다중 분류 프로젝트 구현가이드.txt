@@ -1,0 +1,16 @@
+## CNN 을 사용한 이진/다중 분류 프로젝트 가이드
+ 
+> ### < 다중분류 프로젝트 >
+> 1. 정상/폐렴/Covid-19 데이터셋
+> - https://www.kaggle.com/datasets/pranavraikokte/covid19-image-dataset/data
+> 2. 데이터셋 준비하기
+>    텐서플로우 ImageDataGenerator 사용
+> 3. 데이터 전처리하기
+> 4. Pretrained-model 모델(VGG19 or Xception or MobileNetV2 등 ) 로드하기 
+>    새로운 분류층 추가하기
+>    Compile 하기
+> 5. 모델 학습하기
+> 6. 모델 학습과정 살펴보기 (학습횟수에 따른 accuracy/loss 그래프 그리기) 
+> 7. 모델 평가 및 예측하기
+> 8. 모델 예측 결과 출력(이미지+결과)하기 ( pred_label / true_label )
+> 9. 모델 저장하기

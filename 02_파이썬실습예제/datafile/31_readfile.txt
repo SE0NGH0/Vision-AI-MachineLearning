@@ -1,0 +1,3 @@
+Hello Python.
+Life is short, You need Python!
+Now I am studying Python.
